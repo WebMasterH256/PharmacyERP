@@ -1,12 +1,17 @@
 import datetime
 
-from sqlalchemy import String, Integer, Boolean, DateTime, func
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, Boolean, DateTime, func, Enum
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 
 from Domain.Base import Base
-from Domain.Compra import Compra
-from Domain.Lote import Lote
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+	from Domain.Compra import Compra
+	from Domain.Lote import Lote
+
 
 class Fornecedor(Base):
 	__tablename__ = 'fornecedor'
@@ -22,10 +27,9 @@ class Fornecedor(Base):
 	
 	endereco : Mapped[str] = mapped_column(String(255), nullable=False)
 	ativo : Mapped[bool] = mapped_column(Boolean, nullable=False)
-	
-	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now)
-	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now, onupdate=func.now)
 
+	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now)
+	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
 	compras: Mapped[List["Compra"]] = relationship(
 		"Compra",

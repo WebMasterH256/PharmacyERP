@@ -1,14 +1,18 @@
 import datetime
 import decimal
 
-from sqlalchemy import String, Integer, Float, Boolean, DateTime, func, DECIMAL
+from sqlalchemy import String, Integer, Boolean, DateTime, func, DECIMAL
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import List
 
-from Domain.Alerta import Alerta
 from Domain.Base import Base
-from Domain.Lote import Lote
-from Domain.ItemCompra import ItemCompra
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+	from Domain.Alerta import Alerta
+	from Domain.Lote import Lote
+	from Domain.ItemCompra import ItemCompra
 
 
 class Medicamento(Base):
@@ -29,9 +33,8 @@ class Medicamento(Base):
 	precisa_receita : Mapped[bool] = mapped_column(Boolean, default=False)
 	ativo : Mapped[bool] = mapped_column(Boolean, default=True)
 	
-	created_at : Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now) # "func.now" faz o banco de dados gerenciar a data
-	updated_at : Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now, onupdate=func.now)
-
+	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now)
+	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
 	lotes : Mapped[List["Lote"]] = relationship(
 		back_populates="medicamento",

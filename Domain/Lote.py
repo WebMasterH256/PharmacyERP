@@ -2,14 +2,18 @@ import datetime
 import decimal
 
 from typing import List
-from sqlalchemy import String, Integer, Boolean, DateTime, func, ForeignKey, DECIMAL
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy import String, Integer, DateTime, func, ForeignKey, DECIMAL, Enum
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from Domain.Alerta import Alerta
 from Domain.Base import Base
 from Domain.Enums.StatusLote import StatusLote
-from Domain.Fornecedor import Fornecedor
-from Domain.Medicamento import Medicamento
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+	from Domain.Alerta import Alerta
+	from Domain.Fornecedor import Fornecedor
+	from Domain.Medicamento import Medicamento
 
 
 class Lote(Base):
@@ -28,12 +32,11 @@ class Lote(Base):
 	quantidade_vendida : Mapped[int] = mapped_column(Integer, default=0)
 	
 	preco_unitario : Mapped[decimal.Decimal] = mapped_column(DECIMAL, default=0)
-	status : Mapped[StatusLote] = mapped_column(StatusLote)
-	data_recebimento : Mapped[datetime.datetime] = mapped_column(DateTime)
-	
-	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now)
-	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now, onupdate=func.now)
+	status : Mapped[StatusLote] = mapped_column(Enum(StatusLote))
+	data_recebimento : Mapped[datetime.datetime] = mapped_column(DateTime, nullable=True)
 
+	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now)
+	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
 	medicamento: Mapped["Medicamento"] = relationship(
 		"Medicamento",

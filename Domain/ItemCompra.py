@@ -1,13 +1,17 @@
 import datetime
 import decimal
 
-from sqlalchemy import String, Integer, DateTime, func, ForeignKey, DECIMAL
+from sqlalchemy import String, Integer, DateTime, func, ForeignKey, DECIMAL, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from Domain.Base import Base
 from Domain.Enums.StatusCompra import StatusCompra
-from Domain.Compra import Compra
-from Domain.Medicamento import Medicamento
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+	from Domain.Compra import Compra
+	from Domain.Medicamento import Medicamento
 
 
 class ItemCompra(Base):
@@ -24,11 +28,10 @@ class ItemCompra(Base):
 	numero_lote : Mapped[str] = mapped_column(String(50), nullable=False)
 	
 	data_validade : Mapped[datetime.datetime] = mapped_column(DateTime, nullable=False)
-	status : Mapped[StatusCompra] = mapped_column(StatusCompra)
-	
-	created_at : Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now)
-	updated_at : Mapped[datetime.datetime] = mapped_column(DateTime, default=func.now, onupdate=func.now)
+	status : Mapped[StatusCompra] = mapped_column(Enum(StatusCompra))
 
+	created_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now)
+	updated_at: Mapped[datetime.datetime] = mapped_column(DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
 	compra: Mapped["Compra"] = relationship(
 		"Compra",
