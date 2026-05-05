@@ -6,7 +6,6 @@ from Domain.Enums.StatusLote import StatusLote
 import datetime
 
 def test_database():
-	"""Testa se o banco funciona"""
 	
 	# 1. Inicialização do banco
 	init_db()
@@ -29,10 +28,8 @@ def test_database():
 			ativo=True
 		)
 		db.add(fornecedor)
-		db.commit()  # Salva no banco
 		print(f"✅ Fornecedor criado: {fornecedor.nome}")
 		
-		# Criar medicamento
 		medicamento = Medicamento(
 			nome="Dipirona 500mg",
 			codigo_ean="7896045401234",
@@ -49,11 +46,10 @@ def test_database():
 		db.commit()
 		print(f"✅ Medicamento criado: {medicamento.nome}")
 		
-		# Criar lote (conectado ao medicamento e fornecedor)
 		lote = Lote(
 			codigo_lote="2024-ABC-001",
-			medicamento_id=medicamento.id,  # Conectar ao medicamento
-			fornecedor_id=fornecedor.id,     # Conectar ao fornecedor
+			medicamento_id=medicamento.id,
+			fornecedor_id=fornecedor.id,
 			data_fabricacao=datetime.date(2024, 1, 15),
 			data_validade=datetime.date(2026, 1, 15),
 			quantidade_inicial=1000,
@@ -66,22 +62,17 @@ def test_database():
 		print(f"✅ Lote criado: {lote.codigo_lote}")
 		
 		# 4. TESTAR RELACIONAMENTOS
-		
-		# Acessar medicamento a partir do lote
 		lote_recuperado = db.query(Lote).first()
 		print(f"\n🔗 Lote {lote_recuperado.codigo_lote} contém: {lote_recuperado.medicamento.nome}")
 		
-		# Acessar fornecedor a partir do lote
 		print(f"🔗 Fornecedor: {lote_recuperado.fornecedor.nome}")
 		
-		# Acessar quantidade_disponivel (propriedade calculada)
 		print(f"🔗 Quantidade disponível: {lote_recuperado.quantidade_disponivel}")
 		
-		# Acessar lotes a partir do medicamento
 		medicamento_recuperado = db.query(Medicamento).first()
 		print(f"\n🔗 Medicamento {medicamento_recuperado.nome} tem {len(medicamento_recuperado.lotes)} lote(s)")
 
-		print("\n✅ TODOS OS TESTES PASSARAM!")
+		print("\n✅ TESTES BEM SUCEDIDOS!")
 		
 	except Exception as e:
 		print(f"❌ Erro: {e}")
