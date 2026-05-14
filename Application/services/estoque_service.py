@@ -1,4 +1,3 @@
-# Application/services/estoque_service.py
 from typing import Optional, List
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta

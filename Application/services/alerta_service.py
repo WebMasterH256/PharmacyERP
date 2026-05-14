@@ -78,7 +78,8 @@ class AlertaService:
                 lote_id=lote.id,
                 tipo=TipoAlerta.VENCIDO,
                 urgencia=Urgencia.CRITICO,
-                mensagem=f"🚨 CRÍTICO: Lote {lote.codigo_lote} do {lote.medicamento.nome} JÁ VENCEU em {lote.data_validade.strftime('%d/%m/%Y')}. DESCARTAR IMEDIATAMENTE!",
+                mensagem=f"🚨 CRÍTICO: Lote {lote.codigo_lote} do {lote.medicamento.nome} JÁ VENCEU em "
+                         f"{lote.data_validade.strftime('%d/%m/%Y')}. DESCARTAR IMEDIATAMENTE!",
                 resolvido=False
             )
             self.db.add(alerta)

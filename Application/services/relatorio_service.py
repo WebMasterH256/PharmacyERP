@@ -1,4 +1,3 @@
-# Application/services/relatorio_service.py
 from typing import List, Optional
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
