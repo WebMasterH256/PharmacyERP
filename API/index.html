@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmacyERP - Gestão Farmacêutica</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">P</div>
+        <div class="logo-text">
+          <h1>PharmacyERP</h1>
+          <p>Gestão Farmacêutica</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <i class="fas fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-page="estoque">
+          <i class="fas fa-boxes"></i>
+          <span>Estoque</span>
+        </a>
+        <a href="#" class="nav-item" data-page="preco">
+          <i class="fas fa-tag"></i>
+          <span>Preço</span>
+        </a>
+        <a href="#" class="nav-item" data-page="vendas">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Vendas</span>
+        </a>
+        <a href="#" class="nav-item" data-page="clientes">
+          <i class="fas fa-users"></i>
+          <span>Clientes</span>
+        </a>
+        <a href="#" class="nav-item" data-page="relatorios">
+          <i class="fas fa-file-chart-bar"></i>
+          <span>Relatórios</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="tip-card">
+          <div class="tip-icon">💡</div>
+          <div class="tip-content">
+            <p class="tip-title">Dica do Dia</p>
+            <p class="tip-text">Revise validades de medicamentos semanalmente para evitar perdas.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="breadcrumb">
+            <h2>Dashboard</h2>
+            <p>Visão geral da sua farmácia</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="icon-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-user-circle"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <div class="page-content" id="pageContent">
+        <!-- KPI CARDS -->
+        <div class="kpi-section">
+          <div class="kpi-card kpi-primary">
+            <div class="kpi-header">
+              <span class="kpi-title">Vendas Hoje</span>
+              <i class="fas fa-chart-line kpi-icon"></i>
+            </div>
+            <p class="kpi-value">R$ 2.450,00</p>
+            <span class="kpi-change positive">+12% vs. ontem</span>
+          </div>
+
+          <div class="kpi-card kpi-success">
+            <div class="kpi-header">
+              <span class="kpi-title">Lucro Estimado</span>
+              <i class="fas fa-coins kpi-icon"></i>
+            </div>
+            <p class="kpi-value">R$ 980,00</p>
+            <span class="kpi-change positive">40% de margem</span>
+          </div>
+
+          <div class="kpi-card kpi-warning">
+            <div class="kpi-header">
+              <span class="kpi-title">Produtos em Estoque</span>
+              <i class="fas fa-cube kpi-icon"></i>
+            </div>
+            <p class="kpi-value">127</p>
+            <span class="kpi-change">8 produtos ativos</span>
+          </div>
+
+          <div class="kpi-card kpi-danger">
+            <div class="kpi-header">
+              <span class="kpi-title">Alertas</span>
+              <i class="fas fa-exclamation-triangle kpi-icon"></i>
+            </div>
+            <p class="kpi-value">3</p>
+            <span class="kpi-change danger">Baixo estoque</span>
+          </div>
+        </div>
+
+        <!-- MAIN SECTION -->
+        <div class="main-section">
+          <!-- GRAPH CARD -->
+          <div class="card graph-card">
+            <div class="card-header">
+              <h3>Vendas da Semana</h3>
+              <div class="card-controls">
+                <button class="btn-icon" title="Filtrar">
+                  <i class="fas fa-filter"></i>
+                </button>
+                <button class="btn-icon" title="Baixar">
+                  <i class="fas fa-download"></i>
+                </button>
+              </div>
+            </div>
+            <div class="graph-container">
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+
+          <!-- ALERTS SECTION -->
+          <div class="alerts-section">
+            <h3 class="alerts-title">Alertas Inteligentes</h3>
+            
+            <div class="alert-card alert-danger">
+              <div class="alert-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="alert-content">
+                <p class="alert-title">Validade Próxima</p>
+                <p class="alert-text">Dipirona 500mg - vence em 15 dias</p>
+              </div>
+              <button class="btn-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <div class="alert-card alert-warning">
+              <div class="alert-icon">
+                <i class="fas fa-warehouse"></i>
+              </div>
+              <div class="alert-content">
+                <p class="alert-title">Estoque Baixo</p>
+                <p class="alert-text">Paracetamol 750mg - repor em 5 dias</p>
+              </div>
+              <button class="btn-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <div class="alert-card alert-info">
+              <div class="alert-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <div class="alert-content">
+                <p class="alert-title">Controle Especial</p>
+                <p class="alert-text">2 medicamentos precisam de balanço</p>
+              </div>
+              <button class="btn-close">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
+            <button class="btn-primary btn-full">
+              <i class="fas fa-plus"></i> Nova Venda
+            </button>
+          </div>
+        </div>
+
+        <!-- RECENT SALES TABLE -->
+        <div class="card recent-sales">
+          <div class="card-header">
+            <h3>Vendas Recentes</h3>
+            <a href="#" class="link">Ver todas</a>
+          </div>
+          <div class="table-responsive">
+            <table class="sales-table">
+              <thead>
+                <tr>
+                  <th>Medicamento</th>
+                  <th>Cliente</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dipirona 500mg</td>
+                  <td>João Silva</td>
+                  <td>R$ 45,00</td>
+                  <td>Hoje, 14:30</td>
+                  <td><span class="badge badge-success">Concluído</span></td>
+                </tr>
+                <tr>
+                  <td>Paracetamol 750mg</td>
+                  <td>Maria Santos</td>
+                  <td>R$ 32,00</td>
+                  <td>Hoje, 13:15</td>
+                  <td><span class="badge badge-success">Concluído</span></td>
+                </tr>
+                <tr>
+                  <td>Vitamina C 1000mg</td>
+                  <td>Pedro Costa</td>
+                  <td>R$ 55,00</td>
+                  <td>Hoje, 11:45</td>
+                  <td><span class="badge badge-success">Concluído</span></td>
+                </tr>
+                <tr>
+                  <td>Omeprazol 20mg</td>
+                  <td>Ana Oliveira</td>
+                  <td>R$ 28,00</td>
+                  <td>Ontem, 16:20</td>
+                  <td><span class="badge badge-warning">Pendente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <p>&copy; 2024 PharmacyERP. Todos os direitos reservados.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
