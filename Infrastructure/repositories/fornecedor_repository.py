@@ -1,13 +1,11 @@
 from typing			  import List, Optional, TYPE_CHECKING
 from sqlalchemy.orm   import Session
-from sqlalchemy		  import and_
 
 from .base_repository import BaseRepository
 
-if TYPE_CHECKING:
-	from Domain.Compra	   import Compra
-	from Domain.Fornecedor import Fornecedor
-	from Domain.Lote	   import Lote
+from Domain.Compra	   import Compra
+from Domain.Fornecedor import Fornecedor
+from Domain.Lote	   import Lote
 
 
 class FornecedorRepository(BaseRepository[Fornecedor]):

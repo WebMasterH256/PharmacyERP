@@ -5,9 +5,7 @@ from sqlalchemy import and_
 
 from Domain.Enums.StatusCompra import StatusCompra
 from .base_repository import BaseRepository
-
-if TYPE_CHECKING:
-	from Domain.Compra import Compra
+from Domain.Compra import Compra
 
 
 class CompraRepository(BaseRepository['Compra']):

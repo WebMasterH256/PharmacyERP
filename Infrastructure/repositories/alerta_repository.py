@@ -5,9 +5,7 @@ from sqlalchemy.orm import Session
 from Domain.Enums.TipoAlerta import TipoAlerta
 from Domain.Enums.Urgencia import Urgencia
 from .base_repository import BaseRepository
-
-if TYPE_CHECKING:
-	from Domain.Alerta import Alerta
+from Domain.Alerta import Alerta
 
 
 class AlertaRepository(BaseRepository['Alerta']):

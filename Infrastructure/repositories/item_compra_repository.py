@@ -4,8 +4,7 @@ from sqlalchemy.orm import Session
 from Domain.Enums.StatusCompra import StatusCompra
 from .base_repository import BaseRepository
 
-if TYPE_CHECKING:
-	from Domain.ItemCompra import ItemCompra
+from Domain.ItemCompra import ItemCompra
 
 
 class ItemCompraRepository(BaseRepository['ItemCompra']):
