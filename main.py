@@ -1,5 +1,3 @@
-from typing import TYPE_CHECKING # CARALHO EU ODEIO TYPE_CHECKING AAAAAAAAAAAAAAAAAAAA
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,8 +8,6 @@ from API.controllers.alertas_routes import router as alertas_router
 from API.controllers.lotes_routes import router as lotes_router
 from API.controllers.compras_routes import router as compras_router
 from API.controllers.relatorios_routes import router as relatorios_router
-
-from Domain.Fornecedor import Fornecedor
 
 app = FastAPI(
     title="PharmacyERP API",
@@ -44,4 +40,4 @@ def root():
 # Bloco para permitir execução direta via Python
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("API.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("API.main:app", host="127.0.0.1", port=8080, reload=True)

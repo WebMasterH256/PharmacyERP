@@ -175,11 +175,11 @@ pip install -r requirements.txt
 python main.py
 ```
 
-O servidor estará disponível em `http://localhost:8000`
+O servidor estará disponível em `http://localhost:8080`
 
 ### Documentação da API
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+- **Swagger UI**: http://localhost:8080/docs
+- **ReDoc**: http://localhost:8080/redoc
 
 ## 📚 Exemplos de Uso
 
@@ -271,36 +271,6 @@ Crítico vender lotes mais antigos primeiro para evitar vencimentos. EstoqueServ
 | Frontend | ⏳ Planejado |
 | Testes | ⏳ Planejado |
 | Deploy | ⏳ Planejado |
-
-## 🔮 Próximos Passos
-
-1. **API Routes** (FastAPI endpoints)
-    - CRUD endpoints para cada entidade
-    - Documentação Swagger automática
-    - Error handling robusto
-
-2. **Frontend** (HTML/CSS/JavaScript)
-    - Dashboard com gráficos
-    - Gerenciamento de medicamentos
-    - Alertas em tempo real
-
-3. **Testes**
-    - Testes unitários (pytest)
-    - Testes de integração
-    - Coverage > 80%
-
-4. **Melhorias**
-    - Autenticação e autorização
-    - Paginação em endpoints
-    - Cache com Redis
-    - Logging estruturado
-    - CI/CD com GitHub Actions
-
-## 📖 Documentação
-
-- [Architecture.md](./docs/ARCHITECTURE.md) - Detalhes da arquitetura
-- [API.md](./docs/API.md) - Documentação dos endpoints (em breve)
-- [Services.md](./docs/SERVICES.md) - Guia de services (em breve)
 
 ## 🤝 Contribuições
 
